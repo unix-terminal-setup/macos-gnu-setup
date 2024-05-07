@@ -1,31 +1,27 @@
 #!/usr/bin/env bash
 
-echo "Installing GNU coreutils"
+# Check if macos
 
-brew install coreutils
+git help | echo "Git instaled." || echo "Error: install git."
 
-if [ "$SHELL" == "/bin/bash" ] || [ "$SHELL" == "$HOMEBREW_PREFIX/bin/bash" ]; then
-	echo '' >> ~/.bash_profile
-	echo '# GNU coreutils' >> ~/.bash_profile
-	echo 'export PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"' >> ~/.bash_profile
-fi
+git clone https://github.com/shinokada/macgnu.git
 
-echo "Installing GNU findutils"
+cd macgnu
 
-brew install findutils
+macgnu install
 
-if [ "$SHELL" == "/bin/bash" ] || [ "$SHELL" == "$HOMEBREW_PREFIX/bin/bash" ]; then 
-        echo '' >> ~/.bash_profile
-        echo '# GNU findutils' >> ~/.bash_profile
-        echo 'export PATH="$HOMEBREW_PREFIX/opt/findutils/libexec/gnubin:$PATH"' >> ~/.bash_profile
-fi
+echo 'Adding gnu utils to path: . ~/.macgnu added to ~/.bash_profile and ~/.zshrc'
 
-echo "Installing GNU sed"
+add_gnu_path() {
+	echo '# macgnu' >> ~/.bash_profile
+	echo 'if [ -f "$HOME/.macgnu" ]; then' >> ~/.bash_profile
+	echo '. ~/.macgnu' >> ~/.bash_profile
+	echo 'fi' >> ~/.bash_profile
+}
 
-brew install gnu-sed
+add_gnu_path ~/.bash_profile
+add_gnu_path ~/.zshrc
 
-if [ "$SHELL" == "/bin/bash" ] || [ "$SHELL" == "$HOMEBREW_PREFIX/bin/bash" ]; then
-        echo '' >> ~/.bash_profile
-        echo '# GNU sed' >> ~/.bash_profile
-        echo 'export PATH="$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin:$PATH"' >> ~/.bash_profile
-fi
+cd ..
+
+rm -R macgnu
