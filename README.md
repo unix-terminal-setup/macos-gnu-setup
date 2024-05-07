@@ -2,17 +2,9 @@
 <br>
 
 # macos-gnu-setup
-Script to setup the GNU coreutils and findutils via brew.
+Script to setup the GNU on Macos via brew.
 
-See the following for more information:
-
-`coreutils`:
-- https://formulae.brew.sh/formula/coreutils
-- https://www.gnu.org/software/coreutils/
-
-`findutils`:
-- https://formulae.brew.sh/formula/findutils
-- https://www.gnu.org/software/findutils/
+This script utilises [macgnu](https://github.com/shinokada/macgnu).
 
 ### Quick Start
 
